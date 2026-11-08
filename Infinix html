@@ -1,59 +1,227 @@
 
+
 <!DOCTYPE html>
 <html lang="ur" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abdul AI</title>
+<meta name="theme-color" content="#091426">
+<title>Abdul AI | Smart Education Platform</title>
+<meta name="description" content="Abdul AI - Free Education Platform for Punjab Board students.">
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#101827;color:white;font-family:Arial,sans-serif}
-header{padding:20px;background:#17243a;text-align:center;font-size:25px;font-weight:bold;color:#55d6be}
-main{max-width:700px;margin:auto;padding:18px}
-#welcome{text-align:center;margin:35px 0;color:#d5e4f2}
-#chat{height:55vh;overflow-y:auto;padding:10px}
-.msg{padding:13px;margin:12px 0;border-radius:14px;line-height:1.7;white-space:pre-wrap}
-.user{background:#245b75;margin-right:35px}
-.ai{background:#263448;margin-left:35px}
-form{display:flex;gap:8px;position:sticky;bottom:0;background:#101827;padding:10px 0}
-input{flex:1;min-width:0;padding:15px;border-radius:12px;border:1px solid #52647a;background:#202e42;color:white;font-size:16px}
-button{border:0;border-radius:12px;padding:12px 18px;background:#55d6be;color:#10202a;font-weight:bold}
-small{color:#a9bdce}
+:root{
+--bg:#091426;--panel:#12233b;--card:#182c47;
+--gold:#e8bd68;--white:#f5f7fb;--muted:#a9b9cc;
+--green:#54d6b1;
+}
+body{
+margin:0;background:var(--bg);color:var(--white);
+font-family:Arial,sans-serif;min-height:100vh;
+}
+header{
+background:#101f35;border-bottom:1px solid #293b54;
+padding:16px 20px;display:flex;align-items:center;
+justify-content:space-between;position:sticky;top:0;z-index:5;
+}
+.logo{font-size:23px;font-weight:bold;color:var(--gold)}
+.logo span{color:white}
+.menu-btn{
+background:var(--card);color:white;border:1px solid #344966;
+padding:10px 14px;border-radius:10px;cursor:pointer;
+}
+main{max-width:1050px;margin:auto;padding:20px}
+.hero{
+background:linear-gradient(135deg,#193b59,#14223a 65%,#26334c);
+border:1px solid #344d69;border-radius:22px;
+padding:30px 20px;text-align:center;margin:14px 0 25px;
+}
+.hero .robot{font-size:48px}
+.hero h1{color:var(--gold);font-size:30px;margin:10px 0}
+.hero p{color:#d1dfed;line-height:1.9}
+.tag{
+display:inline-block;padding:7px 15px;border-radius:20px;
+background:#254d4a;color:#9ef1d7;font-size:13px;
+}
+.section-title{font-size:21px;color:var(--gold);margin:28px 0 15px}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.card{
+background:var(--panel);border:1px solid #2d405a;
+padding:19px;border-radius:17px;text-align:center;
+transition:.2s;
+}
+.card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.card .ico{font-size:32px}
+.card h3{margin:10px 0;color:white}
+.card p{font-size:13px;color:var(--muted);line-height:1.7}
+a.btn,button.btn{
+display:inline-block;text-decoration:none;background:var(--gold);
+color:#152239;padding:11px 17px;border:0;border-radius:10px;
+font-weight:bold;cursor:pointer;margin-top:8px;
+}
+.chatbox{
+background:var(--panel);border:1px solid #2d405a;
+border-radius:18px;padding:15px;margin-top:20px;
+}
+#chat{height:280px;overflow:auto;padding:8px}
+.msg{
+padding:12px 14px;margin:10px 0;border-radius:13px;
+line-height:1.8;white-space:pre-wrap;overflow-wrap:anywhere;
+}
+.user{background:#245b75;margin-right:25px}
+.ai{background:#253851;margin-left:25px}
+form{display:flex;gap:8px;margin-top:10px}
+input{
+flex:1;min-width:0;padding:14px;border-radius:11px;
+border:1px solid #52647a;background:#0e1b2d;
+color:white;font-size:15px;
+}
+.send{background:var(--green);color:#10202a;border:0;
+border-radius:11px;padding:12px 18px;font-weight:bold}
+footer{
+text-align:center;padding:25px 15px;margin-top:35px;
+background:#101f35;color:var(--muted);line-height:2;
+}
+.founder{color:var(--gold);font-weight:bold}
+#drawer{
+display:none;background:#12233b;padding:18px;
+border-bottom:1px solid #354963;
+}
+#drawer a{
+display:block;padding:12px;color:white;text-decoration:none;
+border-bottom:1px solid #2d405a;
+}
+@media(max-width:500px){
+main{padding:13px}.hero{padding:23px 14px}
+.hero h1{font-size:25px}.grid{gap:10px}
+.card{padding:14px 9px}.card p{font-size:12px}
+}
 </style>
 </head>
 <body>
-<header>🤖 Abdul AI</header>
+
+<header>
+<div class="logo">🤖 Abdul <span>AI</span></div>
+<button class="menu-btn" onclick="toggleMenu()">☰ مینو</button>
+</header>
+
+<nav id="drawer">
+<a href="#home">🏠 ہوم پیج</a>
+<a href="#education">📚 تعلیمی سیکشن</a>
+<a href="#chatsection">🤖 AI اسسٹنٹ</a>
+<a href="#about">👨‍💻 ہمارے بارے میں</a>
+</nav>
+
 <main>
-<div id="welcome">
-<h2>السلام علیکم! 👋</h2>
-<p>میں Abdul AI ہوں۔ آپ مجھ سے اردو، انگلش یا سرائیکی میں بات کر سکتے ہیں۔</p>
-<small>آپ کا اپنا AI اسسٹنٹ</small>
+<section class="hero" id="home">
+<div class="robot">🤖</div>
+<div class="tag">YOUR SMART EDUCATION PLATFORM</div>
+<h1>Abdul AI</h1>
+<p>علم حاصل کریں، مستقبل روشن بنائیں</p>
+<p>مفت تعلیم، آسان نوٹس اور جدید تعلیمی سہولیات سب کے لیے۔</p>
+</section>
+
+<h2 class="section-title" id="education">📚 تعلیمی مرکز | Education Center</h2>
+
+<div class="grid">
+<div class="card">
+<div class="ico">📘</div>
+<h3>جماعت نہم</h3>
+<p>Class 9 — تمام مضامین کے باب وار نوٹس</p>
+<a class="btn" href="#class9">کھولیں</a>
 </div>
-<div id="chat"></div>
+<div class="card">
+<div class="ico">📗</div>
+<h3>جماعت دہم</h3>
+<p>Class 10 — مکمل تعلیمی مواد</p>
+<a class="btn" href="#class10">کھولیں</a>
+</div>
+<div class="card">
+<div class="ico">🇵🇰</div>
+<h3>اردو میڈیم</h3>
+<p>آسان اردو میں نوٹس اور سوالات</p>
+<a class="btn" href="#class9">دیکھیں</a>
+</div>
+<div class="card">
+<div class="ico">🌐</div>
+<h3>English Medium</h3>
+<p>Notes, MCQs and Solved Exercises</p>
+<a class="btn" href="#class9">Explore</a>
+</div>
+</div>
+
+<h2 class="section-title">📖 جماعت نہم کے مضامین</h2>
+<div class="grid" id="class9">
+<div class="card"><div class="ico">➗</div><h3>ریاضی | Mathematics</h3><p>باب وار نوٹس اور حل شدہ مشقیں</p></div>
+<div class="card"><div class="ico">⚛️</div><h3>فزکس | Physics</h3><p>تعریفیں، سوالات اور فارمولے</p></div>
+<div class="card"><div class="ico">🧪</div><h3>کیمسٹری | Chemistry</h3><p>مکمل باب وار تیاری</p></div>
+<div class="card"><div class="ico">🧬</div><h3>بائیولوجی | Biology</h3><p>اہم سوالات اور MCQs</p></div>
+<div class="card"><div class="ico">💻</div><h3>کمپیوٹر سائنس</h3><p>نوٹس اور مشقیں</p></div>
+<div class="card"><div class="ico">📚</div><h3>اردو و انگلش</h3><p>گرامر، سوالات اور تشریحات</p></div>
+<div class="card"><div class="ico">☪️</div><h3>اسلامیات</h3><p>اہم سوالات و جوابات</p></div>
+<div class="card"><div class="ico">📖</div><h3>ترجمۃ القرآن</h3><p>آسان ترجمہ اور سوالات</p></div>
+</div>
+
+<h2 class="section-title" id="class10">📗 جماعت دہم</h2>
+<div class="card">
+<div class="ico">🎓</div>
+<h3>Class 10 — Coming Soon</h3>
+<p>جماعت دہم کے تمام مضامین کا تعلیمی مواد جلد شامل ہوگا۔</p>
+</div>
+
+<section class="chatbox" id="chatsection">
+<h2 class="section-title">🤖 Abdul AI Assistant</h2>
+<p style="color:#a9b9cc">اردو، English یا سرائیکی میں اپنا سوال لکھیں۔</p>
+<div id="chat">
+<div class="msg ai">السلام علیکم! 👋
+میں Abdul AI ہوں۔ آپ کو تعلیم میں مدد دینے کے لیے حاضر ہوں۔</div>
+</div>
 <form id="form">
-<input id="message" placeholder="اپنا پیغام لکھیں..." autocomplete="off">
-<button type="submit">بھیجیں</button>
+<input id="message" placeholder="اپنا سوال لکھیں..." autocomplete="off">
+<button class="send" type="submit">بھیجیں</button>
 </form>
+<small style="color:#a9b9cc">نوٹ: AI جواب دینے کی سروس ابھی منسلک نہیں ہے۔</small>
+</section>
+
+<section class="card" id="about" style="margin-top:25px">
+<div class="ico">👨‍💻</div>
+<h3>Founder & Admin</h3>
+<div class="founder">عبدالستار</div>
+<p>بانی و ایڈمن | Founder & Admin</p>
+<p>ہمارا مقصد ہر طالب علم تک مفت تعلیم پہنچانا ہے۔</p>
+</section>
 </main>
+
+<footer>
+<strong style="color:#e8bd68">Abdul AI</strong><br>
+Your Smart Education Platform<br>
+علم حاصل کریں، مستقبل روشن بنائیں<br>
+© 2026 Abdul AI — All Rights Reserved
+</footer>
+
 <script>
+function toggleMenu(){
+const d=document.getElementById("drawer");
+d.style.display=d.style.display==="block"?"none":"block";
+}
 const form=document.getElementById("form");
 const input=document.getElementById("message");
 const chat=document.getElementById("chat");
+
 form.addEventListener("submit",function(e){
- e.preventDefault();
- const text=input.value.trim();
- if(!text)return;
- document.getElementById("welcome").style.display="none";
- addMessage(text,"user");
- addMessage("آپ کا پیغام موصول ہوگیا! ابھی AI سروس منسلک نہیں ہوئی۔ اگلے مرحلے میں ہم AI دماغ شامل کریں گے۔","ai");
- input.value="";
+e.preventDefault();
+const text=input.value.trim();
+if(!text)return;
+addMessage(text,"user");
+addMessage("آپ کا پیغام موصول ہوگیا! ابھی AI سروس منسلک نہیں ہوئی۔","ai");
+input.value="";
 });
 function addMessage(text,type){
- const div=document.createElement("div");
- div.className="msg "+type;
- div.textContent=text;
- chat.appendChild(div);
- chat.scrollTop=chat.scrollHeight;
+const div=document.createElement("div");
+div.className="msg "+type;
+div.textContent=text;
+chat.appendChild(div);
+chat.scrollTop=chat.scrollHeight;
 }
 </script>
 </body>
